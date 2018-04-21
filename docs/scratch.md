@@ -20,3 +20,11 @@ Code level
 
 * for those behind on dues send personalized email using `sendmail()`
 
+## Saturday, April 21, 2018 10:42 AM
+
+	smtpObj.login( 'my_email', sys.argv[1] )
+
+pass your email address and `sys.argv[1]`, which will store your password string. 
+
+You’ll enter the password as a command line argument each time you run the program, to avoid saving your password in your source code.
+

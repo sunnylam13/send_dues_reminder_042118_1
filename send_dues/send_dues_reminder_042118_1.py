@@ -3,7 +3,7 @@
 #! python3
 
 # USAGE
-# python3 send_dues_reminder_042118_1.py
+# python3 send_dues_reminder_042118_1.py "PASSWORD"
 
 import logging
 logging.basicConfig(level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s")
@@ -45,6 +45,11 @@ logging.debug( 'unpaidMembers dict is:  ' )
 logging.debug( unpaidMembers )
 
 # log into email account
+
+smtpObj = smtplib.SMTP('smtp.gmail.com',587)
+smtpObj.ehlo()
+smtpObj.starttls()
+smtpObj.login( 'avatar.sage7@gmail.com', sys.argv[1] )
 
 # send out reminder emails
 
