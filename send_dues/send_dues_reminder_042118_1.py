@@ -9,7 +9,9 @@ import logging
 logging.basicConfig(level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s")
 # logging.disable(logging.CRITICAL)
 
-import openpyxl,smtplib,sys
+import openpyxl,smtplib
+import optparse
+import pprint
 
 # open the sheet and get latest due status
 
@@ -46,11 +48,24 @@ logging.debug( unpaidMembers )
 
 # log into email account
 
-smtpObj = smtplib.SMTP('smtp.gmail.com',587)
-smtpObj.ehlo()
-smtpObj.starttls()
-smtpObj.login( 'avatar.sage7@gmail.com', sys.argv[1] )
-logging.debug( 'Email provider login successful.' )
+try:
+	# smtpObj = smtplib.SMTP('smtp.gmail.com',587)
+	smtpObj = smtplib.SMTP_SSL('smtp.gmail.com',465)
+	smtpObj.ehlo()
+	logging.debug( 'ehlo() worked.' )
+	# smtpObj.starttls() # disable if using SMTP_SSL()
+	# logging.debug( 'starttls() worked.' )
+
+	# logging.debug( 'pwd was:  %s' % str(sys.argv[1]) )
+	smtpObj.login( 'avatar.sage7@gmail.com', str(sys.argv[1]) )
+	logging.debug( 'Email provider login successful.' )
+except Exception as e:
+	logging.debug( "There was an exception:  %s" % str(e) )
+	raise e
+
+# optional test
+# logging.debug( "Listing folders:  " )
+# logging.debug( pprint.pprint(smtpObj.list_folders()) )
 
 # send out reminder emails
 
