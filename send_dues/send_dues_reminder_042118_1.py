@@ -50,6 +50,7 @@ smtpObj = smtplib.SMTP('smtp.gmail.com',587)
 smtpObj.ehlo()
 smtpObj.starttls()
 smtpObj.login( 'avatar.sage7@gmail.com', sys.argv[1] )
+logging.debug( 'Email provider login successful.' )
 
 # send out reminder emails
 
