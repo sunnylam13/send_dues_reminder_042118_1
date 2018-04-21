@@ -27,7 +27,22 @@ logging.debug( 'Latest month is:  %s' % str(latestMonth) )
 
 # check each member's payment status
 
+unpaidMembers = {}
 
+for r in range( 2,sheet.max_row + 1 ):
+	payment = sheet.cell( row=r, column=lastCol ).value
+	logging.debug( 'payment status is:  %s' % str(payment) )
+
+	if payment != 'paid':
+		name = sheet.cell(row=r,column=1).value
+		logging.debug( 'name is:  %s' % str(name) )
+		email = sheet.cell(row=r,column=2).value
+		logging.debug( 'email is:  %s' % str(email) )
+		unpaidMembers[name] = email
+		logging.debug( 'email pushed into unpaidMembers dict' )
+
+logging.debug( 'unpaidMembers dict is:  ' )
+logging.debug( unpaidMembers )
 
 # log into email account
 
