@@ -64,3 +64,15 @@ result
 
 maybe try `optparse` to avoid this error where it can't read the password due to the single quote or other special characters
 
+## Monday, April 23, 2018 11:10 AM
+
+tried `optparse` and it still results in the same problem...
+
+[Python argparse argument with quotes](https://stackoverflow.com/questions/13168666/python-argparse-argument-with-quotes)
+
+even escape back slashes don't work in the shell - the error occurs in the shell when running the command line
+
+this means that no password with quotes can be used
+
+[How to escape single quotes within single quoted strings?](https://stackoverflow.com/questions/1250079/how-to-escape-single-quotes-within-single-quoted-strings)
+

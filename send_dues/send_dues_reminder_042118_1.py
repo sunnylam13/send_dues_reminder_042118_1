@@ -3,8 +3,8 @@
 #! python3
 
 # USAGE
-# python3 send_dues_reminder_042118_1.py "EMAIL" "PASSWORD"
-# python3 send_dues_reminder_042118_1.py "avatar.sage7@gmail.com" "PASSWORD"
+# python3 send_dues_reminder_042118_1.py -e "EMAIL" -p "PASSWORD"
+# python3 send_dues_reminder_042118_1.py -e "avatar.sage7@gmail.com" -p "PASSWORD"
 
 import logging
 logging.basicConfig(level=logging.DEBUG, format=" %(asctime)s - %(levelname)s - %(message)s")
