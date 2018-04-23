@@ -62,5 +62,5 @@ result
 	>
 	>
 
-maybe try `optparse`
+maybe try `optparse` to avoid this error where it can't read the password due to the single quote or other special characters
 
