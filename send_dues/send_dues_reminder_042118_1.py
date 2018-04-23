@@ -34,8 +34,8 @@ def unpaid_members_analysis_1():
 
 def email_login_1(email,pwd):
 	try:
-		# smtpObj = smtplib.SMTP('smtp.gmail.com',587)
-		smtpObj = smtplib.SMTP_SSL('smtp.gmail.com',465)
+		# smtpObj = smtplib.SMTP('smtp.gmail.com',587) # open smtp connection
+		smtpObj = smtplib.SMTP_SSL('smtp.gmail.com',465) # open smtp connection
 		smtpObj.ehlo()
 		logging.debug( 'ehlo() worked.' )
 		# smtpObj.starttls() # disable if using SMTP_SSL()
@@ -55,6 +55,23 @@ def email_login_1(email,pwd):
 	return smtpObj # for use outside of function
 
 # send out reminder emails
+
+def send_reminder_emails_1(dict,smtpObj,email):
+	for name,email in unpaidMembers.items():
+		body = """
+			Subject: %s dues unpaid.\n
+			Dear %s,\n
+			Records show that you have not paid dues for %s.\n
+			Please make this payment as soon as possible.\n
+			Thank you!
+			""" % (latestMonth,name,latestMonth)
+		print( 'Sending email to %s...' % str(email) )
+		sendmailStatus = smtpObj.sendmail( str(email),email,body )
+
+		if sendmailStatus != {}: # if the send mail status has failed send targets, which means a non-empty dict is returned
+			print( "There was a problem sending email to %s:  %s" % (email,sendmailStatus) )
+
+	smtpObj.quit() # close smtp connection when done
 
 def main():
 
@@ -95,8 +112,12 @@ def main():
 
 	# check each member's payment status	
 	unpaid_members_analysis_1()
+
 	# log into email account
-	emailSysObj = email_login_1(email_login,email_pwd)
+	smtpObj = email_login_1(email_login,email_pwd)
+
+	# send out reminder emails
+	send_reminder_emails_1(unpaidMembers,smtpObj,email_login)
 
 if __name__ == '__main__':
 	main()
